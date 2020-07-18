@@ -66,9 +66,9 @@ services:
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
-      # KAFKA_CREATE_TOPICS: "test_topic:9:3"
-    volumes:
-      - ./data/kafka/kafka1:/var/lib/kafka/data
+      KAFKA_CREATE_TOPICS: "test_topic:9:3"
+    # volumes:
+    #   - ./data/kafka/kafka1:/var/lib/kafka/data
     depends_on:
       - zoo1
       - zoo2
@@ -87,8 +87,9 @@ services:
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka2:19093,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
-    volumes:
-      - ./data/kafka/kafka2:/var/lib/kafka/data
+      KAFKA_CREATE_TOPICS: "test_topic:9:3"
+    # volumes:
+    #   - ./data/kafka/kafka2:/var/lib/kafka/data
     depends_on:
       - zoo1
       - zoo2
@@ -107,8 +108,9 @@ services:
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka3:19094,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
-    volumes:
-      - ./data/kafka/kafka3:/var/lib/kafka/data
+      KAFKA_CREATE_TOPICS: "test_topic:9:3"
+    # volumes:
+    #   - ./data/kafka/kafka3:/var/lib/kafka/data
     depends_on:
       - zoo1
       - zoo2
@@ -119,3 +121,17 @@ services:
   #   container_name: connect
   #   depends_on: >
   #     BOOTSTRAP_SERVERS: kafka1:9092
+
+
+  ############################################### NODEJS Server ###############################################
+
+  nodeServer:
+    image: 311200/kafka-nodejs-example
+    container_name: nodeServer
+    hostname: nodeServer
+    ports: 
+      - 5000:5000
+    environment: 
+      BROKER_LIST: "kafka1:19092,kafka2:19093,kafka3:19094"
+    depends_on: 
+      - kafka1

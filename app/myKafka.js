@@ -1,14 +1,16 @@
 const kafka = require("kafka-node")
 const JSONStream = require('JSONStream');
 
+const brokerList = process.env.BROKER_LIST
+console.log("BROKER LIST: " + brokerList);
 
 const kafkaClient = new kafka.KafkaClient({
-    kafkaHost: 'localhost:9092,localhost:9093,localhost:9094',
+    kafkaHost: brokerList,
     autoConnect: true,
 });
 
 const producer = new kafka.Producer(kafkaClient, { partitionerType: 1 })
-const consumerGroupStream = new kafka.ConsumerGroupStream({ kafkaHost: "localhost:9092", groupId: "test-node-group", encoding: "utf8" }, ["first_topic"])
+const consumerGroupStream = new kafka.ConsumerGroupStream({ kafkaHost: brokerList.split(',')[0], groupId: "test-node-group", encoding: "utf8" }, ["first_topic"])
 
 exports.writeToKafka = (message) => {
     let payload = [
@@ -16,6 +18,7 @@ exports.writeToKafka = (message) => {
     ]
 
     producer.send(payload, (err, data) => {
+        if (err) {console.log(err);return}
         console.log(data);
     })
 
