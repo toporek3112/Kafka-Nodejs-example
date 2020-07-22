@@ -33,12 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         label.classList.remove("active")
     })
 
-    oboe({
-        url: 'http://localhost:5000/readMessage',
-        headers: {
-            'Connection': 'keep-alive'
-        }
-    })
+    oboe('http://localhost:5000/readMessage')
         .node('!.*', (message) => {
             consumerList.insertAdjacentHTML('beforeend', `<li class="collection-item center">${message.value}</li>`)
             consumerListItems.push(message.value)
