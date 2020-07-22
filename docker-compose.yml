@@ -14,9 +14,9 @@ services:
       ZOO_MY_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
-    volumes: 
-      - ./data/zookeeper/zoo1-data:/var/lib/zookeeper/data
-      - ./data/zookeeper/zoo1-log:/var/lib/zookeeper/log
+    # volumes: 
+    #   - ./data/zookeeper/zoo1-data:/var/lib/zookeeper/data
+    #   - ./data/zookeeper/zoo1-log:/var/lib/zookeeper/log
 
   zoo2:
     image: confluentinc/cp-zookeeper
@@ -29,9 +29,9 @@ services:
       ZOO_MY_ID: 2
       ZOOKEEPER_CLIENT_PORT: 2182
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
-    volumes: 
-      - ./data/zookeeper/zoo2-data:/var/lib/zookeeper/data
-      - ./data/zookeeper/zoo2-log:/var/lib/zookeeper/log
+    # volumes: 
+    #   - ./data/zookeeper/zoo2-data:/var/lib/zookeeper/data
+    #   - ./data/zookeeper/zoo2-log:/var/lib/zookeeper/log
 
   zoo3:
     image: confluentinc/cp-zookeeper
@@ -44,9 +44,9 @@ services:
       ZOO_MY_ID: 3
       ZOOKEEPER_CLIENT_PORT: 2183
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
-    volumes: 
-      - ./data/zookeeper/zoo3-data:/var/lib/zookeeper/data
-      - ./data/zookeeper/zoo3-log:/var/lib/zookeeper/log
+    # volumes: 
+    #   - ./data/zookeeper/zoo3-data:/var/lib/zookeeper/data
+    #   - ./data/zookeeper/zoo3-log:/var/lib/zookeeper/log
 
 
 
