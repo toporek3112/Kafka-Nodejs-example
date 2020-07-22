@@ -75,7 +75,6 @@ services:
       - zoo3
       - kafka2
       - kafka3
-    command: bash -c "sleep 10 && kafka-topics --zookeeper zoo1:2181 --if-not-exists --create --topic first_topic --partitions 20 --replication-factor 3"
 
   kafka2:
     image: confluentinc/cp-kafka
