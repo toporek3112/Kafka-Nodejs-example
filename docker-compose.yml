@@ -128,7 +128,7 @@ services:
   ############################################### NODEJS Server ###############################################
 
   nodeServer:
-    image: 311200/kafka-nodejs-example
+    image: 311200/kafka-poc01
     container_name: nodeServer
     hostname: nodeServer
     ports: 
