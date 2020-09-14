@@ -137,7 +137,7 @@ services:
   ############################################### NODEJS Server ###############################################
 
   nodeServer:
-    image: 311200/kafka-poc01
+    image: tasktrack.telekom.at/parma-poc-docker-local/kafka-poc01
     container_name: nodeServer
     hostname: nodeServer
     ports: 
